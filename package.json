@@ -1,0 +1,37 @@
+{
+  "name": "kindle-clippings-page",
+  "version": "0.1.0",
+  "description": "Convert your kindle clippings into easy-to-read web page",
+  "main": "index.js",
+  "bin": {
+    "khw": "bin/kindle_highlight.js"
+  },
+  "files": [
+    "bin",
+    "tpl",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CocaColf/kindle_clippings_page.git"
+  },
+  "keywords": [
+    "kindle",
+    "kindle highlight",
+    "amazon"
+  ],
+  "author": "https://github.com/CocaColf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CocaColf/kindle_clippings_page/issues"
+  },
+  "homepage": "https://github.com/CocaColf/kindle_clippings_page#readme",
+  "dependencies": {
+    "commander": "^9.4.0",
+    "ejs": "^3.1.8",
+    "ora": "^5.4.1"
+  }
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindle highlights</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        .title {
+            margin-bottom: 24px;
+            padding-left: 15px;
+        }
+
+        .panel-group .book_info {
+            margin-bottom: 12px;
+        }
+
+        .markup_container {
+            padding-bottom: 4px;
+        }
+
+        .book_title {
+            display: flex;
+            align-items: center;
+        }
+
+        .book_title p {
+            margin: 0;
+            padding: 0;
+            margin-right: 4px;
+            font-weight: bolder;
+        }
+
+        .markup_content {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .markup_content p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #212529;
+        }
+
+        .markup_info {
+            display: flex;
+            justify-content: right;
+            justify-items: center;
+            height: 32px;
+            align-items: center;
+        }
+
+        .markup_info p {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            height: 24px;
+            line-height: 24px;
+            padding: 0 4px;
+        }
+
+        .markup_info .markup_info--position {
+            margin-right: 8px;
+            padding-right: 8px;
+        }
+
+        .book_info {
+            position: relative;
+        }
+        .update_time {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h2>
+                <span class="glyphicon glyphicon-book"></span>
+                Kindle highlights
+                <small>
+                    <%= bookCnt %> books <%= markUpCnt %> highlights
+                </small>
+            </h2>
+        </div>
+        <div class="panel-group col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
+            <% Object.keys(allData).forEach(function(bookName, index){ %>
+                <div class="panel panel-default book_info">
+                    <div class="panel-heading" role="tab" id="heading-<%=index%>">
+                        <div class="panel-title book_title" role="button" data-toggle="collapse"
+                            data-target="#collapse-<%=index%>" data-parent="#accordion" aria-expanded="false">
+                            <p class="text-primary">
+                                <%= bookName %>
+                            </p>
+                            <span class="badge">
+                                <%= allData[bookName].length %>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div id="collapse-<%=index%>" class="panel-collapse collapse" role="tabpanel"
+                        aria-labelledby="heading-<%=index%>">
+                        <% allData[bookName].forEach(function(markupInfo, idx){ %>
+
+                            <div class="panel-body markup_container">
+                                <div class="markup_content">
+                                    <p>
+                                        <%= markupInfo['markupCtx'] %>
+                                    </p>
+                                </div>
+                                <div class="markup_info">
+                                    <p class="label label-default markup_info--position">
+                                        <span class="glyphicon glyphicon-bookmark"></span>
+                                        <span>标注于<%= markupInfo['position'] %></span>
+                                    </p>
+                                    <p class="label label-default markup_info--date">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        <span>
+                                            <%= markupInfo['clippingTime'] %>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+        <h4 class="update_time"><u>Updated at <%= updateAt %></u></h4>
+    </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</html>
